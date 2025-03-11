@@ -49,6 +49,7 @@ We adapted our model to generate spoken digit audio by denoising Mel spectrogram
 
 ### Time Series Forecasting
 Inspired by the success of diffusion models in generative tasks, we experimented with time series forecasting using GluonTS datasets and an RNN-based approach.
+
  <img src="static/forecast_TS.png" width="400">
 
 ## Ablations
