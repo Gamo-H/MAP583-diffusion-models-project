@@ -7,7 +7,7 @@ A minimal PyTorch implementation of denoising diffusion probabilistic models (DD
 We extended a base diffusion model implementation to work on different modalities:
 
 - **Image Generation**: Training diffusion models on MNIST, Fashion-MNIST, Cats Dataset ([Kaggle](https://www.kaggle.com/datasets/borhanitrash/cat-dataset)), and Flickr Faces Dataset ([Kaggle](https://www.kaggle.com/datasets/imcr00z/flickr-faces-70k-thumbnails-128x128)).
-- **Audio Generation**: Mimicking diffusion-based denoising to generate digit spoken audios by training on Mel spectrograms using the Command Speech Dataset.
+- **Audio Generation**: Mimicking diffusion-based denoising to generate digit spoken audios by training on Mel spectrograms using the [Speech Commands Dataset](https://huggingface.co/datasets/google/speech_commands).
 - **Time Series Forecasting**: Experimenting with electricity demand forecasting using GluonTS datasets and RNN-based models.
 
 ## Getting Started
