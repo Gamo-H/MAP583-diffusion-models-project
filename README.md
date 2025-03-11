@@ -26,7 +26,7 @@ For training on other datasets, specify the appropriate dataset flag (circle, di
 ### Forward Process
 The forward process progressively adds noise to the data until it resembles pure noise.
 
-![](static/forward_mnist.gif)
+<img src="static/forward_mnist.gif" width="400">
 
 ### Reverse Process
 The model learns to reverse the noise, reconstructing samples from the learned distribution.
