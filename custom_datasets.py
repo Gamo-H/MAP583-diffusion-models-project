@@ -168,8 +168,49 @@ def speechcommands_dataset(n=100, sample_rate=8000, audio_length=8000, n_mels=32
     torch.cuda.empty_cache()
     return dataset
 
+def electricity_ts_dataset_gluonts(n=100000):
+    from gluonts.dataset.repository.datasets import get_dataset
+    gluon_ds = get_dataset("electricity", regenerate=False)
+    all_series = []
+    for entry in gluon_ds.train:
+        series_array = entry['target']  # shape (T,) for 1D or (D,T) for multi
+        all_series.append(series_array)
+    stacked_data = []
+    for s in all_series:
+        if len(s) >= 1000:
+            stacked_data.append(s[:1000])
+    big_array = np.stack(stacked_data, axis=0).astype(np.float32)
+    big_array = big_array.reshape(-1, 1)
+    if len(big_array) > n:
+        big_array = big_array[:n]
+    # Simple mean normalization
+    mean_val = np.mean(big_array, axis=0, keepdims=True)
+    mean_val[mean_val == 0] = 1.0
+    big_array = big_array / mean_val
 
+    tensor_data = torch.from_numpy(big_array)
+    return TensorDataset(tensor_data)
 
+def traffic_ts_dataset_gluonts(n=100000):
+    from gluonts.dataset.repository.datasets import get_dataset
+    gluon_ds = get_dataset("traffic", regenerate=False)
+    all_series = []
+    for entry in gluon_ds.train:
+        series_array = entry['target']  # For the traffic dataset, this might be univariate or multivariate
+        all_series.append(series_array)
+    stacked_data = []
+    for s in all_series:
+        if len(s) >= 1000:
+            stacked_data.append(s[:1000])
+    big_array = np.stack(stacked_data, axis=0).astype(np.float32)
+    big_array = big_array.reshape(-1, 1)
+    if len(big_array) > n:
+        big_array = big_array[:n]
+    mean_val = np.mean(big_array, axis=0, keepdims=True)
+    mean_val[mean_val == 0] = 1.0
+    big_array = big_array / mean_val
+    tensor_data = torch.from_numpy(big_array)
+    return TensorDataset(tensor_data)
 
 
 
@@ -200,5 +241,9 @@ def get_dataset(name, n=10000):
         return faces_dataset()
     elif name == "speech-commands":
         return speechcommands_dataset()
+    elif name == "electricity":
+        return electricity_ts_dataset_gluonts(n)
+    elif name == "traffic":
+        return traffic_ts_dataset_gluonts(n)
     else:
         raise ValueError(f"Unknown dataset: {name}")
