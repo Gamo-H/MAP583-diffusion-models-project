@@ -1,82 +1,68 @@
-# DL-DIY potential project ideas
+# Tiny Diffusion: Denoising Diffusion Models
 
-- read the paper and understand the approach
-- reproduce the results with simple datasets
-- try to make it work with MNIST
+A minimal PyTorch implementation of denoising diffusion probabilistic models (DDPM) applied to various datasets, including 2D data, images, audio spectrograms, and time series data.
 
-# tiny-diffusion
+## Overview
 
-A minimal PyTorch implementation of probabilistic diffusion models for 2D datasets. Get started by running `python ddpm.py -h` to explore the available options for training.
+We extended a base diffusion model implementation to work on different modalities:
 
-## Forward process
+- **Image Generation**: Training diffusion models on MNIST, Fashion-MNIST, Cats Dataset ([Kaggle](https://www.kaggle.com/datasets/borhanitrash/cat-dataset)), and Flickr Faces Dataset ([Kaggle](https://www.kaggle.com/datasets/imcr00z/flickr-faces-70k-thumbnails-128x128)).
+- **Audio Generation**: Mimicking diffusion-based denoising to generate digit spoken audios by training on Mel spectrograms using the Command Speech Dataset.
+- **Time Series Forecasting**: Experimenting with electricity demand forecasting using GluonTS datasets and RNN-based models.
 
-A visualization of the forward diffusion process being applied to a dataset of one thousand 2D points. Note that the dinosaur is not a single training example, it represents each 2D point in the dataset.
+## Getting Started
+Get started by running python ddpm.py -h to explore the available options for training.
+
+### Example
+To train the model on MNIST:
+```bash
+python ddpm.py --dataset mnist --epochs 20 --experiment_name mnist_base
+```
+For training on other datasets, specify the appropriate dataset flag (circle, dino, line, moons, mnist, fashion-mnist, pets, faces,  speech-commands)
+
+
+## Diffusion Process
+
+### Forward Process
+The forward process progressively adds noise to the data until it resembles pure noise.
 
 ![](static/forward.png)
 
-## Reverse process
-
-This illustration shows how the reverse process recovers the distribution of the training data.
+### Reverse Process
+The model learns to reverse the noise, reconstructing samples from the learned distribution.
 
 ![](static/reverse.png)
 
-## Ablations
+## Experiments & Ablations
 
-I have run a series of ablations experiments on hyperparameters, such as learning rate and model size, and visualized the learning process. The columns in the graphs represent the checkpoint epoch, and the rows indicate the hyperparameter values. Each cell displays one thousand generated 2D points.
+### Image Datasets
+We tested our model on grayscale and RGB datasets:
+- MNIST & Fashion-MNIST
+- Cats Dataset
+- Flickr Faces Dataset
 
-### learning rate
+### Audio Spectrograms
+We adapted our model to generate spoken digit audio by denoising Mel spectrograms from the Command Speech Dataset.
 
-![](static/learning_rate.png)
+### Time Series Forecasting
+Inspired by the success of diffusion models in generative tasks, we experimented with time series forecasting using GluonTS datasets and an RNN-based approach.
 
-The learning process is sensitive to the learning rate. At first, the model's output was poor, causing me to suspect a bug. However, simply changing the learning rate value resolved the problem.
-
-### dataset
-
-![](static/datasets.png)
-
-The current model configuration doesn't work well on the `line` dataset, which I consider the most basic among them. The corners should be clear and sharp, but they are fuzzy.
-
-### num timesteps
-
-![](static/num_timesteps.png)
-
-A longer diffusion process results in a better output. With fewer timesteps, the dinosaur is incomplete, missing points from the top and bottom.
-
-### variance schedule
-
-![](static/beta_schedule.png)
-
-The quadratic schedule does not yield better results. Other schedules like cosine or sigmoid should also be considered.
-
-### hidden size
-
-![](static/hidden_size.png)
-
-The capacity of the model doesn't seem to be a bottleneck, as similar results are obtained across various hidden layer sizes.
-
-### number of hidden layers
-
-![](static/num_hidden_layers.png)
-
-As in the hidden size ablation run, the capacity of the model does not seem to be a limiting factor.
-
-### positional embedding (timestep)
-
-![](static/time_embedding.png)
-
-The model benefits from the timestep information, but the specific method of encoding the timestep is not important.
-
-### positional embedding (inputs)
-
-![](static/input_embedding.png)
-
-The use of sinusoidal embeddings for the inputs helps with learning high-frequency functions in low-dimensional problem domains, such as mapping each (x, y) pixel coordinate to (r, g, b) color, as demonstrated in [this study](https://bmild.github.io/fourfeat/). The same holds true in the current scenario.
+### Ablations
+## Results & Insights
+We have run a series of ablations experiments on hyperparameters, such as learning rate and noise scheduling, and visualized the learning process. 
+The columns in the graphs represent the checkpoint epoch, and the rows indicate the hyperparameter values. Please refer to 
+```bash
+ablations.ipynb
+```
+to see the results.
 
 ## References
 
-* The dino dataset comes from the [Datasaurus Dozen](https://www.autodesk.com/research/publications/same-stats-different-graphs) data.
-* HuggingFace's [diffusers](https://github.com/huggingface/diffusers) library.
-* lucidrains' [DDPM implementation in PyTorch](https://github.com/lucidrains/denoising-diffusion-pytorch).
-* Jonathan Ho's [implementation of DDPM](https://github.com/hojonathanho/diffusion).
-* InFoCusp's [DDPM implementation in tf](https://github.com/InFoCusp/diffusion_models).
+- [HuggingFace Diffusers](https://github.com/huggingface/diffusers)
+- [Jonathan Ho's DDPM](https://github.com/hojonathanho/diffusion)
+- [Lucidrains' DDPM PyTorch](https://github.com/lucidrains/denoising-diffusion-pytorch)
+- [Datasaurus Dozen](https://www.autodesk.com/research/publications/same-stats-different-graphs) Dataset
+- [GluonTS for Time Series](https://ts.gluon.ai/)
+
+---
 
