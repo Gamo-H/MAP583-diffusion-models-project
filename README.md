@@ -38,8 +38,11 @@ The model learns to reverse the noise, reconstructing samples from the learned d
 ### Image Datasets
 We tested our model on grayscale and RGB datasets:
 - MNIST & Fashion-MNIST
+![](static/forward_fashion.gif)
 - Cats Dataset
+  ![](static/forward_cats.gif)
 - Flickr Faces Dataset
+  ![](static/reverse_faces.gif)
 
 ### Audio Spectrograms
 We adapted our model to generate spoken digit audio by denoising Mel spectrograms from the Command Speech Dataset.
