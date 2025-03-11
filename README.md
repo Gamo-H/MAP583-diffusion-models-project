@@ -33,7 +33,7 @@ The model learns to reverse the noise, reconstructing samples from the learned d
 
 ![](static/reverse.png)
 
-## Experiments & Ablations
+## Experiments
 
 ### Image Datasets
 We tested our model on grayscale and RGB datasets:
@@ -47,8 +47,7 @@ We adapted our model to generate spoken digit audio by denoising Mel spectrogram
 ### Time Series Forecasting
 Inspired by the success of diffusion models in generative tasks, we experimented with time series forecasting using GluonTS datasets and an RNN-based approach.
 
-### Ablations
-## Results & Insights
+## Ablations
 We have run a series of ablations experiments on hyperparameters, such as learning rate and noise scheduling, and visualized the learning process. 
 The columns in the graphs represent the checkpoint epoch, and the rows indicate the hyperparameter values. Please refer to 
 ```bash
