@@ -64,11 +64,19 @@ to see the results.
 
 ## References
 
+- [project-tiny-diffusion](https://github.com/dataflowr/Project-tiny-diffusion/tree/master#dl-diy-potential-project-ideas)
 - [HuggingFace Diffusers](https://github.com/huggingface/diffusers)
 - [Jonathan Ho's DDPM](https://github.com/hojonathanho/diffusion)
 - [Lucidrains' DDPM PyTorch](https://github.com/lucidrains/denoising-diffusion-pytorch)
-- [Datasaurus Dozen](https://www.autodesk.com/research/publications/same-stats-different-graphs) Dataset
+- [Denoising Diffusion Probabilistic Model (DDPM) using PyTorch](https://github.com/randomaccess2023/MG2023/tree/main/Video%2052)
+- [Datasaurus Dozen](https://www.autodesk.com/research/publications/same-stats-different-graphs) 
 - [GluonTS for Time Series](https://ts.gluon.ai/)
+- [Cats datasets](https://www.kaggle.com/datasets/borhanitrash/cat-dataset)
+- [Flickr Faces Dataset](https://www.kaggle.com/datasets/imcr00z/flickr-faces-70k-thumbnails-128x128)
+- [Noise2Music: Text-conditioned Music Generation with Diffusion Models](https://arxiv.org/abs/2306.05284)
+- [Deep Unsupervised Learning using Nonequilibrium Thermodynamics](https://arxiv.org/abs/1503.03585)
+- [The Rise of Diffusion Models in Time-Series Forecasting](https://arxiv.org/abs/2401.03006)
+- [Autoregressive Denoising Diffusion Models for Multivariate Probabilistic Time Series Forecasting](https://arxiv.org/abs/2101.12072)
 
 ---
 
