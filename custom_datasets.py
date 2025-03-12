@@ -82,17 +82,6 @@ def fashion_mnist_dataset():
 
 def pets_dataset():
     transform = transforms.Compose([
-        transforms.Resize((32, 32)),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5))  # Normalisation des images RGB
-    ])
-
-    dataset = datasets.OxfordIIITPet(root="./data", split="trainval", download=True, transform=transform, target_types="category")
-
-    return dataset
-
-def pets_dataset():
-    transform = transforms.Compose([
         transforms.Resize((32, 32)),  
         transforms.ToTensor(),
         transforms.Normalize(mean=(0.5, 0.5, 0.5), std=(0.5, 0.5, 0.5)) 
