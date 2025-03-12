@@ -42,7 +42,7 @@ We tested our model on grayscale and RGB datasets:
 - Cats Dataset
   ![](static/forward_cats.gif)
 - Flickr Faces Dataset
-  ![](static/reverse_faces.gif)
+  ![](static/reverse_faces2.gif)
 
 ### Audio Spectrograms
 We adapted our model to generate spoken digit audio by denoising Mel spectrograms from the Command Speech Dataset.
